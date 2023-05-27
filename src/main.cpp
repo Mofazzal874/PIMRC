@@ -331,14 +331,14 @@ void add_info(){
         while(fread(&C,sizeof(C),1,data) == 1){
             if(strcmp(n_id,C.NID) == 0){
                 isFound = 1;
-                gotoxy(37,12);
+                gotoxy(1,22);
                     cout << "Information already exist.";
                 break;
             }
         }
         if(isFound == 0){
             if(data == NULL){
-                gotoxy(37,12);
+                gotoxy(1,22);
                     cout << "Unable to Open File.";
 
             }
@@ -364,7 +364,7 @@ void add_info(){
                     cout << "Blood Group: ";
                     gets(C.blood_group);
                 fwrite(&C,sizeof(C),1,data);
-                gotoxy(40,20);
+                gotoxy(40,24);
                     cout << "Information is added successfully.";
             }
         }
@@ -431,7 +431,7 @@ void display(){
         fflush(stdin);
     gets(n_id);
     FILE *data;
-    data = fopen("info.txt","r");
+    data = fopen("publicInfo.txt","r");
     while(fread(&C,sizeof(C),1,data) == 1){
         if(strcmp(n_id,C.NID) == 0){
             isFound = 1;
@@ -449,7 +449,12 @@ void display(){
             cout << "Address: " << C.address;
         gotoxy(37,19);
             cout << "Phone No: " << C.phone_no;
-    }else{
+        gotoxy(37,20);
+            cout << "Email: " << C.email;
+        gotoxy(37,21);
+            cout << "Blood Group: " << C.blood_group;
+    }
+    else{
         gotoxy(37,12);
             cout << "Sorry,We don't have any information.";
     }
@@ -683,7 +688,6 @@ void boxBorder(){
     }
 
 }
-
 
 
 
