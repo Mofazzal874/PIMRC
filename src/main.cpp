@@ -11,11 +11,13 @@ class information{
     char address[50];
     char phone_no[15];
     char email[50] ;
-    char blood_group[5]; 
+    char blood_group[5];
+    friend ostream& operator<<(ostream& out , information& C) ;
+    friend istream& operator>>(istream& in , information& C) ;  
 }C;
 
+
 //----------------------------Login & Registration---------------------------------------------
-void login();
 void registerUser();
 void regAndLogin() ;
 void loginAsAdmin() ;
@@ -30,8 +32,6 @@ void boxBorder();
 void window();
 void print_heading(const char title[]);
 void clearWindow();
-
-
 
 //----------------------------Main Window Functions--------------------------------------------
 void main_window();
@@ -50,6 +50,53 @@ int main(){
 
 
 }
+ostream& operator<<(ostream& out , information& C){
+
+        gotoxy(37,14);
+            cout << "NID: " << C.NID;
+        gotoxy(37,15);
+            cout << "Name: " << C.fName << " " << C.lName;
+        gotoxy(37,16);
+            cout << "Address: " << C.address;
+        gotoxy(37,17);
+            cout << "Phone Number: " << C.phone_no;
+        gotoxy(37,18);
+            cout << "Email: " << C.email;
+        gotoxy(37,19);
+            cout << "Blood Group: " << C.blood_group;
+        return out ; 
+
+}
+istream& operator>>(istream& in , information& C){
+
+
+        int print = 37 ; 
+        gotoxy(print,12);
+            cout << "NID: ";
+            gets(C.NID);
+        gotoxy(print,13);
+            cout << "First Name: ";
+            gets(C.fName);
+        gotoxy(print,14);
+            cout << "Last Name: ";
+            gets(C.lName);
+        gotoxy(print,15);
+            cout << "Address: ";
+            gets(C.address);
+        gotoxy(print,16);
+            cout << "Phone Number: ";
+            gets(C.phone_no);
+        gotoxy(print, 17) ; 
+            cout<<"E-mail: "; 
+            gets(C.email) ;
+        gotoxy(print , 18) ; 
+            cout<<"Blood Group: " ; 
+            gets(C.blood_group);
+    return in ;  
+
+}
+
+
 void regAndLogin(){
 
     int choice;
@@ -396,18 +443,7 @@ void find_info(){
     if(isFound == 1){
         gotoxy(37,12);
             cout << "The Information is Found.";
-        gotoxy(37,14);
-            cout << "NID: " << C.NID;
-        gotoxy(37,15);
-            cout << "Name: " << C.fName << " " << C.lName;
-        gotoxy(37,16);
-            cout << "Address: " << C.address;
-        gotoxy(37,17);
-            cout << "Phone Number: " << C.phone_no;
-        gotoxy(37,18);
-            cout << "Email: " << C.email;
-        gotoxy(37,19);
-            cout << "Blood Group: " << C.blood_group;
+            cout<<C; 
 
     }
     else{
@@ -441,18 +477,7 @@ void display(){
     if(isFound == 1){
         gotoxy(37,12);
             cout << "Information is Found.";
-        gotoxy(37,14);
-            cout << "NID: " << C.NID;
-        gotoxy(37,15);
-            cout << "Name: " << C.fName << " " << C.lName;
-        gotoxy(37,16);
-            cout << "Address: " << C.address;
-        gotoxy(37,19);
-            cout << "Phone No: " << C.phone_no;
-        gotoxy(37,20);
-            cout << "Email: " << C.email;
-        gotoxy(37,21);
-            cout << "Blood Group: " << C.blood_group;
+            cout<<C ; 
     }
     else{
         gotoxy(37,12);
@@ -469,7 +494,7 @@ void edit_info(){
     SetColor(10);
     print_heading(" -- Edit Information -- ");
     char n_id[15];
-    int isFound = 0, print = 37;
+    int isFound = 0;
     gotoxy(37,10);
         cout << "Enter NID: ";
         fflush(stdin);
@@ -479,21 +504,7 @@ void edit_info(){
     while(fread(&C, sizeof(C),1,data) == 1){
         if(strcmp(n_id, C.NID) == 0){
             fflush(stdin);
-            gotoxy(print,12);
-                cout << "NID: ";
-                gets(C.NID);
-            gotoxy(print,13);
-                cout << "First Name: ";
-                gets(C.fName);
-            gotoxy(print,14);
-                cout << "Name: ";
-                gets(C.lName);
-            gotoxy(print,15);
-                cout << "Address: ";
-                gets(C.address);
-            gotoxy(print,16);
-                cout << "Phone Number: ";
-                gets(C.phone_no);
+            cin>>C ; 
             fseek(data,-sizeof(C), SEEK_CUR);
             fwrite(&C,sizeof(C), 1, data);
             gotoxy(40,20);
@@ -503,7 +514,7 @@ void edit_info(){
         }
     }
     if(!isFound){
-        gotoxy(print, 12);
+        gotoxy(37, 12);
             cout << "Sorry, We don't have any information about U.";
     }
     fclose(data);
