@@ -2,7 +2,6 @@
 #include<windows.h>
 using namespace std;
 
-
 class information{
     public:
     char NID[15];
