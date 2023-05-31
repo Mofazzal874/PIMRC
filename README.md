@@ -20,7 +20,7 @@ and create a file named AdminsDataBase.txt.Then enter some names and password
 ## **Objectives:**
 - To create a Database of Citizens of bangladesh.
 
-## **Features: **
+## ** Features: **
 - Easily Records peoples's information
 - Easy to find data
 - Information Security as only administrator have the rights to delete or update information
